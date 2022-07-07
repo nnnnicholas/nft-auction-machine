@@ -31,8 +31,8 @@ contract NFTAuctionMachine is
     uint256 public jbProjectId;
 
     constructor(
-        string _name,
-        string _symbol,
+        string memory _name,
+        string memory _symbol,
         address WETHADDRESS,
         address JBADDRESS,
         uint256 duration,
