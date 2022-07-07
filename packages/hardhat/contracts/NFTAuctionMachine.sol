@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "./WETH9.sol";
 import "./JB.sol";
 
-contract YourCollectible is
+contract NFTAuctionMachine is
     ERC721,
     ERC721Enumerable,
     ERC721URIStorage
