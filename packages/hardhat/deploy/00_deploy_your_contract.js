@@ -28,10 +28,12 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   //console.log("deployed weth mock at address ",wethy.address)
   // Getting a previousl
 
-  await deploy("YourCollectible", {
+  await deploy("NFTAuctionMachine", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
     args: [
+      "NFTAuctionMachine",
+      "NFTAM",
       "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", //wethy.address, //0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2, //wethy.address,
       "0x7Ae63FBa045Fec7CaE1a75cF7Aa14183483b8397", //jb.address, //0x7Ae63FBa045Fec7CaE1a75cF7Aa14183483b8397, // jb payment terminal
       3600,
@@ -42,7 +44,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   });
 
   // Getting a previously deployed contract
-  const yourCollectible = await ethers.getContract("YourCollectible", deployer);
+  const nftAuctionMachine = await ethers.getContract("NFTAuctionMachine", deployer);
 
   // ToDo: Verify your contract with Etherscan for public chains
   // if (chainId !== "31337") {
@@ -64,4 +66,4 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-module.exports.tags = ["YourCollectible"];
+module.exports.tags = ["NFTAuctionMachine"];

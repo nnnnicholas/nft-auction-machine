@@ -271,23 +271,23 @@ function App(props) {
   ]);
 
   // keep track of a variable from the contract in the local React state:
-  const balance = useContractReader(readContracts, "YourCollectible", "balanceOf", [address]);
+  const balance = useContractReader(readContracts, "NFTAuctionMachine", "balanceOf", [address]);
   console.log("🤗 balance:", balance);
 
-  const highestBid = useContractReader(readContracts, "YourCollectible", "highestBid");
+  const highestBid = useContractReader(readContracts, "NFTAuctionMachine", "highestBid");
   console.log("🤗 highestBid:", highestBid);
 
-  const highestBidder = useContractReader(readContracts, "YourCollectible", "highestBidder");
+  const highestBidder = useContractReader(readContracts, "NFTAuctionMachine", "highestBidder");
   console.log("🤗 highestBidder:", highestBidder);
 
-  const timeLeft = useContractReader(readContracts, "YourCollectible", "timeLeft");
+  const timeLeft = useContractReader(readContracts, "NFTAuctionMachine", "timeLeft");
   console.log("🤗 timeLeft:", timeLeft);
 
   // 📟 Listen for broadcast events
-  const transferEvents = useEventListener(readContracts, "YourCollectible", "Transfer", localProvider, 1);
+  const transferEvents = useEventListener(readContracts, "NFTAuctionMachine", "Transfer", localProvider, 1);
   console.log("📟 Transfer events:", transferEvents);
 
-  const bidEvents = useEventListener(readContracts, "YourCollectible", "Bid", localProvider, 1);
+  const bidEvents = useEventListener(readContracts, "NFTAuctionMachine", "Bid", localProvider, 1);
   console.log("📟 Bid events:", bidEvents);
 
   //
@@ -304,9 +304,9 @@ function App(props) {
       for (let tokenIndex = 0; tokenIndex < balance; tokenIndex++) {
         try {
           console.log("GEtting token index", tokenIndex);
-          const tokenId = await readContracts.YourCollectible.tokenOfOwnerByIndex(address, tokenIndex);
+          const tokenId = await readContracts.NFTAuctionMachine.tokenOfOwnerByIndex(address, tokenIndex);
           console.log("tokenId", tokenId);
-          const tokenURI = await readContracts.YourCollectible.tokenURI(tokenId);
+          const tokenURI = await readContracts.NFTAuctionMachine.tokenURI(tokenId);
           console.log("tokenURI", tokenURI);
 
           const ipfsHash = tokenURI.replace("https://ipfs.io/ipfs/", "");
@@ -661,8 +661,8 @@ function App(props) {
     console.log("Uploaded Hash: ", uploaded);
     const result = tx(
       writeContracts &&
-        writeContracts.YourCollectible &&
-        writeContracts.YourCollectible.mintItem(address, uploaded.path),
+        writeContracts.NFTAuctionMachine &&
+        writeContracts.NFTAuctionMachine.mintItem(address, uploaded.path),
       update => {
         console.log("📡 Transaction Update:", update);
         if (update && (update.status === "confirmed" || update.status === 1)) {
@@ -737,7 +737,7 @@ function App(props) {
                   size="large"
                   onClick={() => {
                     tx(
-                      writeContracts.YourCollectible.bid({value: ethers.utils.parseEther(""+bidAmount)})
+                      writeContracts.NFTAuctionMachine.bid({value: ethers.utils.parseEther(""+bidAmount)})
                     )
                     setBidAmount();
                   }}
@@ -751,7 +751,7 @@ function App(props) {
                 size="large"
                 onClick={() => {
                   tx(
-                    writeContracts.YourCollectible.finalize()
+                    writeContracts.NFTAuctionMachine.finalize()
                   )
                 }}
               >
@@ -819,7 +819,7 @@ function App(props) {
                         <Button
                           onClick={() => {
                             console.log("writeContracts", writeContracts);
-                            tx(writeContracts.YourCollectible.transferFrom(address, transferToAddresses[id], id));
+                            tx(writeContracts.NFTAuctionMachine.transferFrom(address, transferToAddresses[id], id));
                           }}
                         >
                           Transfer
@@ -843,7 +843,7 @@ function App(props) {
               contractConfig={contractConfig}
             />
             <Contract
-              name="YourCollectible"
+              name="NFTAuctionMachine"
               signer={userSigner}
               provider={localProvider}
               address={address}
