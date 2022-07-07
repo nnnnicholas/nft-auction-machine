@@ -5,9 +5,11 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@jbx-protocol/contracts-v2/contracts/JBETHERC20ProjectPayer.sol";
+
 
 import "./WETH9.sol";
-import "./JB.sol";
+
 
 contract NFTAuctionMachine is
     ERC721,
