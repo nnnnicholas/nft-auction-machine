@@ -5,10 +5,9 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@jbx-protocol/contracts-v2/contracts/JBETHERC20ProjectPayer.sol";
-
 
 import "./WETH9.sol";
+import "@jbx-protocol/contracts-v2/contracts/interfaces/IJBProjectPayer.sol";
 
 
 contract NFTAuctionMachine is
@@ -24,7 +23,7 @@ contract NFTAuctionMachine is
 
     WETH9 public weth;
 
-    JB public jb;
+    IJBProjectPayer public projectPayer;
 
     string public hardcodedTokenURI;
 
